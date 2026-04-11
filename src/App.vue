@@ -12,6 +12,9 @@ const objectOfAttrs = {
 }
 const number = 2
 const reversedMessage = (msg) => msg.split('').reverse().join('-')
+
+const attributeName = 'href'
+const url = 'https://vuejs.org/'
 </script>
 
 <template>
@@ -35,4 +38,8 @@ const reversedMessage = (msg) => msg.split('').reverse().join('-')
   <div :id="`msg-${dynamicId}`">{{ message.split('').reverse().join('') }}</div>
 
   <div :id="reversedMessage(dynamicId)">{{ reversedMessage(message) }}</div>
+
+  <a v-bind:[attributeName]="url">Click here</a>
+  <!-- shorthand -->
+  <!-- <a :[attributeName]="url">Click here</a> -->
 </template>
