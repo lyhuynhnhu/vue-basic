@@ -1,44 +1,13 @@
-# vue-basic
+## computed trong Vue
 
-This template should help get you started developing with Vue 3 in Vite.
+- Tính hiệu quả:
+  - Vue sẽ theo dõi các state phụ thuộc có trong computed để tính toán và chỉ cập nhật các dependency đó thay đổi
+    -> giảm thiểu các lần tính toán không cần thiết
+  - computed return về 1 computed ref, Vue sẽ ghi nhớ giá trị đó qua các lần render mà ko cần tính toán lại khi các state trong nó không change
+  - giống với mục đích của `useMemo` trong React Hook
 
-## Recommended IDE Setup
+- Tính phản ứng (reactivity):
+  Các thuộc tính tính toán nó phản ứng với sự thay đổi của các state để tính toán lại
+  -> giúp cập nhật kịp thời & mượt mà
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
-
-## Recommended Browser Setup
-
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+- Có khả năng tái sử dụng code
