@@ -1,45 +1,31 @@
 <script setup>
 import { ref } from 'vue'
 
-const isLoggedIn = ref(false)
-
-const toggle = () => (isLoggedIn.value = !isLoggedIn.value)
-
-const status = ref('online')
-
-const changeStatus = () => {
-  if (status.value === 'online') {
-    status.value = 'busy'
-  } else if (status.value === 'busy') {
-    status.value = 'offline'
-  } else if (status.value === 'offline') {
-    status.value = 'online'
-  } else {
-    status.value = 'unknown'
-  }
-}
-
-const isShow = ref(true)
-
-const toggleShow = () => (isShow.value = !isShow.value)
+const fruits = ref([
+  {
+    id: 1,
+    name: 'apple',
+    amount: 5,
+  },
+  {
+    id: 2,
+    name: 'banana',
+    amount: 10,
+  },
+  {
+    id: 3,
+    name: 'orange',
+    amount: 15,
+  },
+])
 </script>
 
 <template>
-  <h3>v-if</h3>
-
-  <p v-if="isLoggedIn">User is logged in</p>
-  <p v-else>User is not logged in</p>
-  <button @click="toggle" class="button">{{ isLoggedIn ? 'Logout' : 'Login' }}</button>
-
-  <p v-if="status === 'online'">User is online</p>
-  <p v-else-if="status === 'busy'">User is busy</p>
-  <p v-else-if="status === 'offline'">User is offline</p>
-  <p v-else>User status is unknown</p>
-  <button @click="changeStatus" class="button">Change status</button>
-
-  <h3>v-show</h3>
-  <p v-show="isShow">This content is visible</p>
-  <button @click="toggleShow" class="button">{{ isShow ? 'Hide' : 'Show' }}</button>
+  <h3>v-for</h3>
+  <ul>
+    <li v-for="fruit in fruits" :key="fruit.id">{{ fruit.name }} - {{ fruit.amount }}</li>
+  </ul>
+  <span v-for="n in 10" :key="n">{{ n }}</span>
 </template>
 
 <style>
