@@ -1,62 +1,45 @@
 <script setup>
-import { computed, reactive, ref } from 'vue'
+import { ref } from 'vue'
 
-const isActive = ref(false)
-const hasError = ref(true)
-const background = ref('blue')
+const isLoggedIn = ref(false)
 
-const classObj = reactive({
-  active: true,
-  'has-error': false,
-})
+const toggle = () => (isLoggedIn.value = !isLoggedIn.value)
 
-const stylesObj = reactive({
-  color: '#fff',
-  cursor: 'pointer',
-})
+const status = ref('online')
 
-const comptedClass = computed(() => ({
-  active: isActive.value && !hasError.value,
-  'has-error': hasError.value,
-}))
+const changeStatus = () => {
+  if (status.value === 'online') {
+    status.value = 'busy'
+  } else if (status.value === 'busy') {
+    status.value = 'offline'
+  } else if (status.value === 'offline') {
+    status.value = 'online'
+  } else {
+    status.value = 'unknown'
+  }
+}
 
-const changeStatus = () => (hasError.value = !hasError.value)
+const isShow = ref(true)
+
+const toggleShow = () => (isShow.value = !isShow.value)
 </script>
 
 <template>
-  <h3>Binding class</h3>
+  <h3>v-if</h3>
 
-  <button class="button" :class="{ active: isActive, 'has-error': hasError }">
-    {{ hasError ? 'Error' : 'Normal' }}
-  </button>
-  <br /><br />
-  <button class="button" :class="classObj">Reactive class</button>
-  <br /><br />
-  <button class="button" :class="comptedClass">Computed class</button>
-  <br /><br />
-  <button
-    @click="changeStatus"
-    class="button"
-    :class="[isActive ? 'active' : '', { 'has-error': hasError }]"
-  >
-    Binding array
-  </button>
+  <p v-if="isLoggedIn">User is logged in</p>
+  <p v-else>User is not logged in</p>
+  <button @click="toggle" class="button">{{ isLoggedIn ? 'Logout' : 'Login' }}</button>
 
-  <h3>Binding style</h3>
+  <p v-if="status === 'online'">User is online</p>
+  <p v-else-if="status === 'busy'">User is busy</p>
+  <p v-else-if="status === 'offline'">User is offline</p>
+  <p v-else>User status is unknown</p>
+  <button @click="changeStatus" class="button">Change status</button>
 
-  <button
-    :style="[
-      {
-        padding: '10px 20px',
-        border: 'none',
-        borderRadius: '5px',
-        background,
-      },
-      stylesObj,
-    ]"
-  >
-    Button
-  </button>
+  <h3>v-show</h3>
+  <p v-show="isShow">This content is visible</p>
+  <button @click="toggleShow" class="button">{{ isShow ? 'Hide' : 'Show' }}</button>
 </template>
 
 <style>
@@ -67,23 +50,5 @@ const changeStatus = () => (hasError.value = !hasError.value)
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
-}
-
-.active {
-  border: none;
-  background: green;
-  color: #fff;
-  &:hover {
-    background: darkgreen;
-  }
-}
-
-.has-error {
-  border: none;
-  background: rgb(229, 57, 57);
-  color: #fff;
-  &:hover {
-    background: rgb(196, 31, 31);
-  }
 }
 </style>
