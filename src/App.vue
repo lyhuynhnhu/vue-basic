@@ -3,10 +3,16 @@ import { computed, reactive, ref } from 'vue'
 
 const isActive = ref(false)
 const hasError = ref(true)
+const background = ref('blue')
 
 const classObj = reactive({
   active: true,
   'has-error': false,
+})
+
+const stylesObj = reactive({
+  color: '#fff',
+  cursor: 'pointer',
 })
 
 const comptedClass = computed(() => ({
@@ -34,6 +40,22 @@ const changeStatus = () => (hasError.value = !hasError.value)
     :class="[isActive ? 'active' : '', { 'has-error': hasError }]"
   >
     Binding array
+  </button>
+
+  <h3>Binding style</h3>
+
+  <button
+    :style="[
+      {
+        padding: '10px 20px',
+        border: 'none',
+        borderRadius: '5px',
+        background,
+      },
+      stylesObj,
+    ]"
+  >
+    Button
   </button>
 </template>
 
