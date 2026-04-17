@@ -1,45 +1,72 @@
 <script setup>
-const message = 'Hello World!'
-const rawHtml = '<span style="color: red">This should be red</span>'
-const dynamicId = 'dynamic-id'
-const isButtonDisabled = true
-const objectOfAttrs = {
-  id: 'container',
-  class: 'wrapper',
-  style: {
-    color: 'green',
-  },
-}
-const number = 2
-const reversedMessage = (msg) => msg.split('').reverse().join('-')
+import { ref } from 'vue'
 
-const attributeName = 'href'
-const url = 'https://vuejs.org/'
+const name = ref('Vue.js')
+
+function greet(event) {
+  alert(`Hello ${name.value}!`)
+  // `event` is the native DOM event
+  if (event) {
+    console.log(event.target.tagName)
+  }
+}
+
+function say(message) {
+  alert(message)
+}
+
+function warn(message, event) {
+  if (event) event.preventDefault()
+  alert(message)
+}
+
+const submit = () => alert('Submitted')
 </script>
 
 <template>
-  <h1>Template syntax</h1>
-  <p>Using text interpolation: {{ message }}</p>
-  <p>Using v-html directive: <span v-html="rawHtml"></span></p>
+  <h1>Event handling</h1>
+  <button @click="greet">Greet</button>
 
-  <div v-bind:id="dynamicId">Attribute binding</div>
-  <div :id="dynamicId">Attribute binding - shorthand</div>
+  <button @click="say('hello')">Say hello</button>
+  <button @click.once="say('bye')">Say bye once</button>
 
-  <button :disabled="isButtonDisabled">Button</button>
+  <!-- using $event special variable -->
+  <button @click="warn('Form cannot be submitted yet.', $event)">Submit</button>
 
-  <div v-bind="objectOfAttrs">Binding multi attributes</div>
+  <!-- using inline arrow function -->
+  <button @click="(event) => warn('Form cannot be submitted yet.', event)">Submit</button>
+  <br />
 
-  <p>js expression: 1 + 1 = {{ 1 + 1 }}</p>
+  <!-- the click event's propagation will be stopped -->
+  <p>stop modifier</p>
+  <button @click="say('parent clicking')">
+    <span style="text-decoration: underline; cursor: pointer" @click.stop="say('child clicking')">
+      Child click
+    </span>
+    Parent click
+  </button>
 
-  <div>{{ number + 1 }}</div>
+  <!-- the submit event will no longer reload the page -->
+  <p>prevent modifier</p>
+  <a href="https://google.com" @click.prevent>click to google</a>
+  <form @submit.prenvent="submit">
+    <button type="submit">Submit</button>
+  </form>
 
-  <button :disabled="isButtonDisabled">{{ isButtonDisabled ? 'Disabled' : 'Enabled' }}</button>
+  <!-- only trigger handler if event.target is the element itself -->
+  <p>self modifier</p>
+  <button @click.self="say('parent clicking')">
+    <span style="text-decoration: underline; padding: 10px" @click.self="say('child clicking')">
+      Child click
+    </span>
+    Parent click
+  </button>
 
-  <div :id="`msg-${dynamicId}`">{{ message.split('').reverse().join('') }}</div>
-
-  <div :id="reversedMessage(dynamicId)">{{ reversedMessage(message) }}</div>
-
-  <a v-bind:[attributeName]="url">Click here</a>
-  <!-- shorthand -->
-  <!-- <a :[attributeName]="url">Click here</a> -->
+  <p>capture modifier</p>
+  <button @click.capture="say('parent clicking')">
+    <span style="text-decoration: underline; padding: 10px" @click.capture="say('child clicking')">
+      Child click
+    </span>
+    Parent click
+  </button>
 </template>
