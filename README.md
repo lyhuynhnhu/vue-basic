@@ -1,40 +1,18 @@
-\*\* Event modifiers:
+`v-model`: 1 directive trong Vue.js giúp tạo ra liên kết dữ liệu hai chiều (two-way data binding).
 
-- .stop: ngăn chặn event lan truyền lên các phần tử cha
-  - khi click vào con, chỉ hàm của con chạy, cha không bị ảnh hưởng
-  - bản chất nó là: `event.stopPropagation()`
+- Hiểu đơn giản là: khi dữ liệu trong code thay đổi thì giao diện cập nhật, và ngược lại khi người dùng nhập liệu trên giao diện thì dữ liệu trong code cũng tự động thay đổi theo.
 
-- .prevent: ngăn chặn hành vi mặc định của trình duyệt
-  - vd: ko cho thẻ `<a>` chuyển trang hoặc `<form>` tự động tải lại trang khi submit
-  - bản chất nó là: `event.preventDefault()`
+\*\* Modifiers:
 
-- .self: chỉ kích hoạt hàm xử lý nếu event xảy ra trực tiếp trên chính phần tử đó, chứ ko phải từ một phần tử con bên trong
+- `.lazy`
+  - Cơ chế: Thay vì cập nhật dữ liệu ngay lập tức sau mỗi phím bấm (sự kiện input), nó chỉ cập nhật sau khi người dùng rời khỏi ô nhập hoặc nhấn Enter (sự kiện change).
 
-- .once: event chỉ chạy 1 lần duy nhất
+  - Dùng khi: ko muốn ứng dụng xử lý dữ liệu liên tục (như khi thực hiện tìm kiếm API nặng) mà chỉ muốn xử lý khi người dùng đã nhập xong.
 
-- .capture: thay đổi thứ tự xử lý event, chạy tù ngoài vào trong
+- `.number`
+  - Cơ chế: Tự động chuyển đổi giá trị nhập vào thành kiểu dữ liệu số (number). Nếu giá trị ko thể chuyển đổi (ví dụ: nhập chữ), nó sẽ giữ nguyên kiểu chuỗi.
 
-\*\* Key Aliases​:
+  - Dùng khi: với các ô nhập tuổi, giá cả, số lượng mà ko muốn phải dùng parseInt() hay parseFloat() thủ công trong code.
 
-- .enter
-- .tab
-- .delete (captures both "Delete" and "Backspace" keys)
-- .esc
-- .space
-- .up
-- .down
-- .left
-- .right
-
-\*\* System Modifier Keys​:
-
-- .ctrl
-- .alt
-- .shift
-- .meta
-
-\*\* Mouse button modifiers:
-
-- .left
-- .right
-- .middle
+- `.trim`
+  - Cơ chế: Tự động loại bỏ các khoảng trắng thừa ở đầu và cuối chuỗi dữ liệu mà người dùng nhập vào.

@@ -2,75 +2,49 @@
 import { ref } from 'vue'
 
 const name = ref('Vue.js')
+const content = ref('')
+const fruits = ref([])
+const gender = ref('')
+const selected = ref('')
+const checked = ref(false)
 
-function greet(event) {
-  alert(`Hello ${name.value}!`)
-  // `event` is the native DOM event
-  if (event) {
-    console.log(event.target.tagName)
-  }
+const options = ref([
+  { text: 'One', value: 'A' },
+  { text: 'Two', value: 'B' },
+  { text: 'Three', value: 'C' },
+])
+
+const handleInput = (event) => {
+  name.value = event.target.value
 }
-
-function say(message) {
-  alert(message)
-}
-
-function warn(message, event) {
-  if (event) event.preventDefault()
-  alert(message)
-}
-
-const submit = () => alert('Submitted')
 </script>
 
 <template>
-  <h1>Event handling</h1>
-  <button @click="greet">Greet</button>
+  <h1>Form input bindings</h1>
+  <p>Curent name: {{ name }}</p>
+  <input :value="name" @input="handleInput" />
+  <p>Current content: {{ content }}</p>
+  <textarea v-model="content"></textarea>
 
-  <button @click="say('hello')">Say hello</button>
-  <button @click.once="say('bye')">Say bye once</button>
+  <p>Fruits: {{ fruits }}</p>
+  <input id="apple" type="checkbox" v-model="fruits" value="apple" />
+  <label for="apple">Apple</label>
+  <input id="banana" type="checkbox" v-model="fruits" value="banana" />
+  <label for="banana">Banana</label>
+  <input id="grape" type="checkbox" v-model="fruits" value="grape" />
+  <label for="grape">Grape</label>
 
-  <!-- using $event special variable -->
-  <button @click="warn('Form cannot be submitted yet.', $event)">Submit</button>
+  <p>Gender selected: {{ gender }}</p>
+  <input id="male" type="radio" v-model="gender" value="male" />
+  <label for="male">Male</label>
+  <input id="female" type="radio" v-model="gender" value="female" />
+  <label for="female">Female</label>
 
-  <!-- using inline arrow function -->
-  <button @click="(event) => warn('Form cannot be submitted yet.', event)">Submit</button>
-  <br />
+  <p>Selected: {{ selected }}</p>
+  <select v-model="selected">
+    <option v-for="option in options" :value="option.value">{{ option.text }}</option>
+  </select>
 
-  <!-- the click event's propagation will be stopped -->
-  <p>stop modifier</p>
-  <button @click="say('parent clicking')">
-    <span style="text-decoration: underline; cursor: pointer" @click.stop="say('child clicking')">
-      Child click
-    </span>
-    Parent click
-  </button>
-
-  <!-- the submit event will no longer reload the page -->
-  <p>prevent modifier</p>
-  <a href="https://google.com" @click.prevent>click to google</a>
-  <form @submit.prenvent="submit">
-    <button type="submit">Submit</button>
-  </form>
-
-  <!-- only trigger handler if event.target is the element itself -->
-  <p>self modifier</p>
-  <button @click.self="say('parent clicking')">
-    <span style="text-decoration: underline; padding: 10px" @click.self="say('child clicking')">
-      Child click
-    </span>
-    Parent click
-  </button>
-
-  <p>capture modifier</p>
-  <button @click.capture="say('parent clicking')">
-    <span style="text-decoration: underline; padding: 10px" @click.capture="say('child clicking')">
-      Child click
-    </span>
-    Parent click
-  </button>
-
-  <p>key modifier</p>
-  <input @keyup.enter="say($event.target.value)" />
-  <button @click.right="say('hello')">Right click</button>
+  <p>Checked: {{ checked }}</p>
+  <input id="checking" type="checkbox" v-model="checked" true-value="yes" false-value="no" />
 </template>
