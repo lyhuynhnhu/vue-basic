@@ -13,3 +13,28 @@
 - .once: event chỉ chạy 1 lần duy nhất
 
 - .capture: thay đổi thứ tự xử lý event, chạy tù ngoài vào trong
+
+\*\* Key Aliases​:
+
+- .enter
+- .tab
+- .delete (captures both "Delete" and "Backspace" keys)
+- .esc
+- .space
+- .up
+- .down
+- .left
+- .right
+
+\*\* System Modifier Keys​:
+
+- .ctrl
+- .alt
+- .shift
+- .meta
+
+\*\* Mouse button modifiers:
+
+- .left
+- .right
+- .middle

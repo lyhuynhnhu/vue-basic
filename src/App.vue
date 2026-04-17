@@ -69,4 +69,8 @@ const submit = () => alert('Submitted')
     </span>
     Parent click
   </button>
+
+  <p>key modifier</p>
+  <input @keyup.enter="say($event.target.value)" />
+  <button @click.right="say('hello')">Right click</button>
 </template>
