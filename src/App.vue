@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch } from 'vue'
+import { reactive, ref, watch } from 'vue'
 
 const question = ref('')
 const answer = ref('Questions usually contain a question mark')
@@ -19,6 +19,39 @@ watch(question, async (newQuestion, oldQuestion) => {
     }
   }
 })
+
+const x = ref(0)
+const y = ref(0)
+
+const increase = () => {
+  x.value++
+  y.value++
+}
+
+watch([x, y], ([newX, newY], [oldX, oldY]) => {
+  console.log(`x changed from ${oldX} to ${newX}`)
+  console.log(`y changed from ${oldY} to ${newY}`)
+})
+
+watch(
+  () => x.value + y.value,
+  (sum) => {
+    console.log(`sum: ${sum}`)
+  },
+)
+
+const obj = reactive({
+  count: 0,
+})
+
+watch(
+  () => obj.count,
+  () => {
+    console.log(`count: ${obj.count}`)
+  },
+)
+
+const increaseCount = () => obj.count++
 </script>
 
 <template>
@@ -27,4 +60,10 @@ watch(question, async (newQuestion, oldQuestion) => {
     <input v-model="question" :disabled="isLoading" />
   </p>
   <p>{{ answer }}</p>
+
+  <p>x: {{ x }}, y: {{ y }}</p>
+  <button @click="increase">Increment</button>
+
+  <p>count: {{ obj.count }}</p>
+  <button @click="increaseCount">Increse count</button>
 </template>
