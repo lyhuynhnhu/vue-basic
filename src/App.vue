@@ -42,16 +42,25 @@ watch(
 
 const obj = reactive({
   count: 0,
+  user: {
+    name: 'John',
+    age: 30,
+  },
 })
 
 watch(
-  () => obj.count,
-  () => {
-    console.log(`count: ${obj.count}`)
+  obj,
+  (newObj, oldObj) => {
+    console.log('oldObj: ', JSON.stringify(oldObj))
+    console.log('newObj: ', JSON.stringify(newObj))
   },
+  { deep: true, immediate: true },
 )
 
-const increaseCount = () => obj.count++
+const change = () => {
+  // obj.count++
+  obj.user.age++
+}
 </script>
 
 <template>
@@ -64,6 +73,6 @@ const increaseCount = () => obj.count++
   <p>x: {{ x }}, y: {{ y }}</p>
   <button @click="increase">Increment</button>
 
-  <p>count: {{ obj.count }}</p>
-  <button @click="increaseCount">Increse count</button>
+  <p>obj: {{ obj }}</p>
+  <button @click="change">Change</button>
 </template>
