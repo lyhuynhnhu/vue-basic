@@ -1,5 +1,5 @@
 <script setup>
-import { reactive, ref, watch } from 'vue'
+import { reactive, ref, watch, watchEffect } from 'vue'
 
 const question = ref('')
 const answer = ref('Questions usually contain a question mark')
@@ -61,6 +61,10 @@ const change = () => {
   // obj.count++
   obj.user.age++
 }
+
+watchEffect(() => {
+  console.log('x: ', x.value, 'y: ', y.value)
+})
 </script>
 
 <template>
