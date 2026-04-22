@@ -13,6 +13,10 @@ onMounted(() => {
     item.style.opacity = 1
   })
 })
+
+const handleWithThirdParty = (el) => {
+  console.log(el)
+}
 </script>
 
 <template>
@@ -25,4 +29,7 @@ onMounted(() => {
       {{ item }}
     </li>
   </ul>
+
+  <p>function refs</p>
+  <div :ref="(el) => handleWithThirdParty(el)">Hello</div>
 </template>
