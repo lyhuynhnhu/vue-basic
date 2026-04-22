@@ -1,13 +1,13 @@
-\*\*\* Watchers là 1 tính năng cho phép "theo dõi" sự thay đổi của 1 biến (data hoặc computed) và thực hiện 1 hành động nào đó (side effect) khi giá trị của biến đó thay đổi
+### Template refs:
 
-\*\* Khi nào nên dùng Watchers?
+- Truy cập trực tiếp vào các phần tử DOM
 
-=> khi cần thực hiện các tác vụ không đồng bộ hoặc các logic phức tạp sau khi dữ liệu thay đổi:
+- Tương tác với các instance của component
 
-- Gọi API khi một giá trị đầu vào thay đổi (ví dụ: tìm kiếm sản phẩm khi người dùng nhập tên)
+\* Chỉ nên dùng Refs khi:
 
-- Thao tác với DOM thủ công
+- cần thao tác thủ công với DOM (ví dụ: focus(), scrollTo())
 
-- Lưu dữ liệu vào localStorage
+- cần đo đạc kích thước của một phần tử (ví dụ: clientHeight)
 
-- Thiết lập bộ đếm thời gian (Timers)
+- cần tích hợp các thư viện bên thứ 3 ko trực tiếp làm việc với Virtual DOM (ví dụ: D3.js, Google Maps, các thư viện Video Player).
