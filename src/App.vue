@@ -2,6 +2,11 @@
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
 import ButtonCount from './components/ButtonCount.vue'
+import { ref } from 'vue'
+import ChildComponent from './components/ChildComponent.vue'
+
+const count = ref(1)
+const sayHi = () => console.log('say hiiii')
 </script>
 
 <template>
@@ -10,7 +15,19 @@ import ButtonCount from './components/ButtonCount.vue'
 
     <div class="wrapper">
       <HelloWorld msg="Hello world!" />
-      <ButtonCount :init-count="1" />
+      <ButtonCount :init-count="count" />
+      <!-- or can pass props in camelCase -->
+      <!-- <ButtonCount :initCount="count" /> -->
+
+      <ChildComponent
+        :prop-a="10"
+        prop-b="2"
+        prop-c="apple"
+        :prop-e="{ msg: 'hello' }"
+        prop-f="omg"
+        :prop-g="sayHi"
+        disable
+      />
 
       <nav>
         <RouterLink to="/">Home</RouterLink>
