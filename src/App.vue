@@ -1,12 +1,17 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
+import { ref } from 'vue'
 import HelloWorld from './components/HelloWorld.vue'
 import ButtonCount from './components/ButtonCount.vue'
-import { ref } from 'vue'
 import ChildComponent from './components/ChildComponent.vue'
+import Counter from './components/Counter.vue'
 
-const count = ref(1)
+const count = ref(0)
 const sayHi = () => console.log('say hiiii')
+
+const increaseBy = (num) => {
+  count.value += num
+}
 </script>
 
 <template>
@@ -15,7 +20,7 @@ const sayHi = () => console.log('say hiiii')
 
     <div class="wrapper">
       <HelloWorld msg="Hello world!" />
-      <ButtonCount :init-count="count" />
+      <Counter :init-count="count" />
       <!-- or can pass props in camelCase -->
       <!-- <ButtonCount :initCount="count" /> -->
 
@@ -28,6 +33,8 @@ const sayHi = () => console.log('say hiiii')
         :prop-g="sayHi"
         disable
       />
+
+      <ButtonCount @increase="count++" @decrease="count--" @increase-by="increaseBy" />
 
       <nav>
         <RouterLink to="/">Home</RouterLink>

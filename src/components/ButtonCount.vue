@@ -1,14 +1,21 @@
 <script setup>
-import { computed, ref } from 'vue'
+const emits = defineEmits(['increase', 'decrease', 'increase-by'])
 
-const props = defineProps({
-  initCount: Number,
-})
-const count = ref(props.initCount || 0)
-const countPlus = computed(() => props.initCount + 1)
+const callIncrease = () => {
+  emits('increase')
+}
+
+const callDecrease = () => {
+  emits('decrease')
+}
+
+const increaseBy = () => {
+  emits('increase-by', 5)
+}
 </script>
 
 <template>
-  <button type="button" @click="count++">{{ count }}</button>
-  <p>init count plus: {{ countPlus }}</p>
+  <button type="button" @click="callIncrease">Increase</button>
+  <button type="button" @click="callDecrease">Decrease</button>
+  <button type="button" @click="increaseBy">Increase by 5</button>
 </template>
