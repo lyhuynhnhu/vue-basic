@@ -12,7 +12,16 @@
 </template>
 
 <script setup>
-const name = defineModel('name', { type: String })
+const [name, modifiers] = defineModel('name', {
+  set(value) {
+    if (modifiers.uppercase) {
+      return value.toUpperCase()
+    }
+    return value
+  },
+})
+
+console.log(modifiers)
 const address = defineModel('address', { type: String })
 
 const changeName = () => {

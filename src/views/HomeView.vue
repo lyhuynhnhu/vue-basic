@@ -21,7 +21,7 @@ watchEffect(() => {
 <template>
   <main>
     <GlobalCompA />
-    <ComponentVModel v-model:name="name" v-model:address="address" />
+    <ComponentVModel v-model:name.uppercase="name" v-model:address="address" />
     <br />
     <button @click="setDefaultName">Set default name</button>
     <button @click="setDefaultAddress">Set default address</button>
