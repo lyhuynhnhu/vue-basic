@@ -1,9 +1,22 @@
 <script setup>
-import TheWelcome from '../components/TheWelcome.vue'
+import ComponentVModel from '@/components/ComponentVModel.vue'
+import { ref, watchEffect } from 'vue'
+
+const name = ref('')
+
+const setDefaultName = () => {
+  name.value = 'Huynh Nhu'
+}
+
+watchEffect(() => {
+  console.log(name.value)
+})
 </script>
 
 <template>
   <main>
-    <TheWelcome />
+    <GlobalCompA />
+    <ComponentVModel v-model="name" />
+    <button @click="setDefaultName">Set default name</button>
   </main>
 </template>
