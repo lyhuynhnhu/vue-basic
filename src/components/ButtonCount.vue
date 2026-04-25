@@ -15,7 +15,13 @@ const increaseBy = () => {
 </script>
 
 <template>
-  <button type="button" @click="callIncrease">Increase</button>
-  <button type="button" @click="callDecrease">Decrease</button>
-  <button type="button" @click="increaseBy">Increase by 5</button>
+  <button type="button" @click="callIncrease">
+    <slot name="increase"></slot>
+  </button>
+  <button type="button" @click="callDecrease">
+    <slot name="decrease"></slot>
+  </button>
+  <button type="button" @click="increaseBy">
+    <slot name="increase-by"></slot>
+  </button>
 </template>

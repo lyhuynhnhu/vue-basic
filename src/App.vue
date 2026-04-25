@@ -34,7 +34,11 @@ const increaseBy = (num) => {
         disable
       />
 
-      <ButtonCount @increase="count++" @decrease="count--" @increase-by="increaseBy" />
+      <ButtonCount @increase="count++" @decrease="count--" @increase-by="increaseBy">
+        <template #increase>Increase</template>
+        <template #decrease>Decrease</template>
+        <template #increase-by><span>Increase by</span></template>
+      </ButtonCount>
 
       <nav>
         <RouterLink to="/">Home</RouterLink>
