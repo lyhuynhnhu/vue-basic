@@ -1,6 +1,13 @@
+<script setup>
+import { inject } from 'vue'
+
+const { locale } = inject('locale')
+</script>
+
 <template>
   <div class="about">
     <h1>This is an about page</h1>
+    <p>locale: {{ locale }}</p>
     <GlobalCompB />
   </div>
 </template>

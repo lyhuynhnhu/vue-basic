@@ -1,9 +1,12 @@
 <script setup>
 import ComponentVModel from '@/components/ComponentVModel.vue'
-import { ref, watchEffect } from 'vue'
+import { inject, ref, watchEffect } from 'vue'
 
 const name = ref('')
 const address = ref('')
+
+const { locale } = inject('locale')
+const msg = inject('msgFromMain')
 
 const setDefaultName = () => {
   name.value = 'Huynh Nhu'
@@ -25,5 +28,7 @@ watchEffect(() => {
     <br />
     <button @click="setDefaultName">Set default name</button>
     <button @click="setDefaultAddress">Set default address</button>
+    <p>locale: {{ locale }}</p>
+    <p>msg from main: {{ msg }}</p>
   </main>
 </template>

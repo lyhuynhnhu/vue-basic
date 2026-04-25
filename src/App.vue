@@ -1,6 +1,6 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
-import { ref } from 'vue'
+import { provide, ref } from 'vue'
 import HelloWorld from './components/HelloWorld.vue'
 import ButtonCount from './components/ButtonCount.vue'
 import ChildComponent from './components/ChildComponent.vue'
@@ -12,6 +12,17 @@ const sayHi = () => console.log('say hiiii')
 const increaseBy = (num) => {
   count.value += num
 }
+
+const currentLocale = ref('en-US')
+
+const updateLocale = () => {
+  currentLocale.value = 'vn-VN'
+}
+
+provide('locale', {
+  locale: currentLocale,
+  updateLocale,
+})
 </script>
 
 <template>
