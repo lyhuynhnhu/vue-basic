@@ -26,4 +26,4 @@ là cơ chế của Vue.js để giải quyết vấn đề "Prop Drilling" (tru
 
 - để tối ưu hiệu suất ứng dụng bằng cách chia nhỏ file JavaScript (code splitting), giúp trang web tải lần đầu nhanh hơn vì trình duyệt ko phải tải toàn bộ code cùng lúc
 
-- dùng nó cho các component con nặng (ví dụ: biểu đồ, bản đồ, hoặc modal chỉ hiện khi bấm nút,...)
+- dùng nó khi import các component con nặng (ví dụ: biểu đồ, bản đồ, hoặc modal chỉ hiện khi bấm nút,...)
